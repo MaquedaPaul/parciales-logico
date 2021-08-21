@@ -117,5 +117,19 @@ esPeligroso(Pirata):-
     Recompensa > 100000000.
 
 
+%Modelado
+
+
+%6)
+
+esPeligroso(Pirata):-
+    comio(Pirata,Fruta),
+    frutaPeligrosa(Fruta).
+
+%7)
+
+tripulacionDeAsfalto(Tripulacion):-
+    tripulante(_,Tripulacion),
+    forall(tripulante(Pirata, Tripulacion), noPuedeNadar(Pirata)).
 
 
