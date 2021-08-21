@@ -102,8 +102,19 @@ recompensaPirata(Pirata,RecompensaTotal):-
     findall(Recompensa,impactoEnRecompensa(Pirata,_,Recompensa),Recompensas),
     sum_list(Recompensas, RecompensaTotal).
 
+%5)
 
+esTemible(Tripulacion):-
+    recompensaTotalTripulacion(Tripulacion, RecompensaTotal),
+    RecompensaTotal > 500000000.
 
+esTemible(Tripulacion):-
+    tripulante(_,Tripulacion),
+    forall(tripulante(Pirata,Tripulacion), esPeligroso(Pirata)).
+
+esPeligroso(Pirata):-
+    recompensaPirata(Pirata, Recompensa),
+    Recompensa > 100000000.
 
 
 
