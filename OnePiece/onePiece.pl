@@ -119,6 +119,25 @@ esPeligroso(Pirata):-
 
 %Modelado
 
+noPuedeNadar/1.
+
+comio(luffy, fruta(paramecia, gomugomu)).
+comio(buggy, fruta(paramecia, barabara)).
+comio(law, fruta(paramecia, opeope)).
+comio(chopper, fruta(zoan, hitohito, humano)).
+comio(lucci, fruta(zoan, nekoneko, leopardo)).
+comio(smoker, fruta(logia, mokumoku, humano)).
+
+
+frutaPeligrosa(fruta(paramecia, gomugomu)).
+frutaPeligrosa(fruta(paramecia, opeope)).
+frutaPeligrosa(fruta(zoan, _, lobo)).
+frutaPeligrosa(fruta(zoan, _, leopardo)).
+frutaPeligrosa(fruta(zoan, _, anaconda)).
+frutaPeligrosa(fruta(logia,_,_)).
+
+noPuedeNadar(Pirata):-
+    comio(Pirata,_).
 
 %6)
 
