@@ -1,4 +1,5 @@
 % Relaciona Pirata con Tripulacion
+ :-style_check(-discontiguous).
 
 tripulante(luffy, sombreroDePaja).
 
@@ -68,17 +69,32 @@ impactoEnRecompensa(hatchan, llegadaAEastBlue, 3000).
 
 %1)
 tripulacionesParticiparonEn(Tripulacion,OtraTripulacion,Evento):-
-    tripulante(Tripulante, Tripulacion),
-    tripulante(OtroTripulante, OtraTripulacion),
-    Tripulacion \= OtraTripulacion,
+    tripulacionParticipaDeUnEvento(Tripulacion,Evento),
+    tripulacionParticipaDeUnEvento(OtraTripulacion,Evento),
+    Tripulacion \= OtraTripulacion.
+
+tripulacionParticipaDeUnEvento(Tripulacion,Evento):-
     impactoEnRecompensa(Tripulante,Evento,_),
-    impactoEnRecompensa(OtroTripulante,Evento,_).
+    tripulante(Tripulante, Tripulacion).
+
+
+
 
 %2)
 seDestacoEn(Pirata,Evento):-
+    impactoEnRecompensa(Pirata,Evento,Recompensa),
+    forall(impactoEnRecompensa(_, Evento, OtraRecompensa), Recompensa >= OtraRecompensa).
+
+/*
+seDestacoEn(Pirata,Evento):-
+    impactoEnRecompensa(Pirata,Evento,Recompensa),
+    forall((impactoEnRecompensa(OtroPirata, Evento, OtraRecompensa), Pirata \= OtroPirata), Recompensa > OtraRecompensa).
+*/
+/*
+seDestacoEn(Pirata,Evento):-
     impactoEnRecompensa(Pirata,Evento,_),
     forall((impactoEnRecompensa(Pirata, Evento, Recompensa),impactoEnRecompensa(OtroPirata, Evento, OtraRecompensa), Pirata \= OtroPirata), Recompensa > OtraRecompensa).
-
+*/
 %3)
 
 pasoDesapercibido(Evento, Pirata):-
@@ -126,10 +142,9 @@ comio(buggy, fruta(paramecia, barabara)).
 comio(law, fruta(paramecia, opeope)).
 comio(chopper, fruta(zoan, hitohito, humano)).
 comio(lucci, fruta(zoan, nekoneko, leopardo)).
-comio(smoker, fruta(logia, mokumoku, humano)).
+comio(smoker, fruta(logia, mokumoku, humo)).
 
 
-frutaPeligrosa(fruta(paramecia, gomugomu)).
 frutaPeligrosa(fruta(paramecia, opeope)).
 frutaPeligrosa(fruta(zoan, _, lobo)).
 frutaPeligrosa(fruta(zoan, _, leopardo)).
@@ -139,6 +154,13 @@ frutaPeligrosa(fruta(logia,_,_)).
 noPuedeNadar(Pirata):-
     comio(Pirata,_).
 
+/*
+noPuedeNadar(zoro).
+noPuedeNadar(robin).
+noPuedeNadar(ussop).
+noPuedeNadar(sanji).
+noPuedeNadar(nami).
+*/
 %6)
 
 esPeligroso(Pirata):-
