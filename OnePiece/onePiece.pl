@@ -74,6 +74,11 @@ tripulacionesParticiparonEn(Tripulacion,OtraTripulacion,Evento):-
     impactoEnRecompensa(Tripulante,Evento,_),
     impactoEnRecompensa(OtroTripulante,Evento,_).
 
+%2)
+seDestacoEn(Pirata,Evento):-
+    impactoEnRecompensa(Pirata,Evento,_),
+    forall((impactoEnRecompensa(Pirata, Evento, Recompensa),impactoEnRecompensa(OtroPirata, Evento, OtraRecompensa), Pirata \= OtroPirata), Recompensa > OtraRecompensa).
+
 
 
 
