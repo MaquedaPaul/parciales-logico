@@ -79,8 +79,17 @@ seDestacoEn(Pirata,Evento):-
     impactoEnRecompensa(Pirata,Evento,_),
     forall((impactoEnRecompensa(Pirata, Evento, Recompensa),impactoEnRecompensa(OtroPirata, Evento, OtraRecompensa), Pirata \= OtroPirata), Recompensa > OtraRecompensa).
 
+%3)
+
+pasoDesapercibido(Evento, Pirata):-
+    tripulante(Pirata, Tripulacion),
+    tripulacionParticipaEn(Tripulacion, Evento),
+    not(impactoEnRecompensa(Pirata,Evento,_)).
 
 
+tripulacionParticipaEn(Tripulacion, Evento):-
+    impactoEnRecompensa(Pirata,Evento,_),
+    tripulante(Pirata, Tripulacion).
 
 
 
