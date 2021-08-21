@@ -66,6 +66,13 @@ impactoEnRecompensa(arlong, llegadaAEastBlue, 20000000).
 
 impactoEnRecompensa(hatchan, llegadaAEastBlue, 3000).
 
+%1)
+tripulacionesParticiparonEn(Tripulacion,OtraTripulacion,Evento):-
+    tripulante(Tripulante, Tripulacion),
+    tripulante(OtroTripulante, OtraTripulacion),
+    Tripulacion \= OtraTripulacion,
+    impactoEnRecompensa(Tripulante,Evento,_),
+    impactoEnRecompensa(OtroTripulante,Evento,_).
 
 
 
