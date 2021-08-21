@@ -91,6 +91,18 @@ tripulacionParticipaEn(Tripulacion, Evento):-
     impactoEnRecompensa(Pirata,Evento,_),
     tripulante(Pirata, Tripulacion).
 
+%4)
+
+recompensaTotalTripulacion(Tripulacion, RecompensaTotal):-
+    findall(Recompensa, (recompensaPirata(Pirata,Recompensa), tripulante(Pirata,Tripulacion)), Recompensas),
+    sum_list(Recompensas, RecompensaTotal).
+
+recompensaPirata(Pirata,RecompensaTotal):-
+    tripulante(Pirata,_),
+    findall(Recompensa,impactoEnRecompensa(Pirata,_,Recompensa),Recompensas),
+    sum_list(Recompensas, RecompensaTotal).
+
+
 
 
 
