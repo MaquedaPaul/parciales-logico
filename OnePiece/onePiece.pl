@@ -85,6 +85,14 @@ seDestacoEn(Pirata,Evento):-
     impactoEnRecompensa(Pirata,Evento,Recompensa),
     forall(impactoEnRecompensa(_, Evento, OtraRecompensa), Recompensa >= OtraRecompensa).
 
+pirataMasDestacado(Pirata, Evento):-
+  impactoEnRecompensa(Pirata, Evento, Recompensa),
+  not((
+    impactoEnRecompensa(_, Evento, OtraRecompensa),
+    OtraRecompensa > Recompensa
+  )).
+
+
 /*
 seDestacoEn(Pirata,Evento):-
     impactoEnRecompensa(Pirata,Evento,Recompensa),
@@ -110,7 +118,10 @@ tripulacionParticipaEn(Tripulacion, Evento):-
 %4)
 
 recompensaTotalTripulacion(Tripulacion, RecompensaTotal):-
-    findall(Recompensa, (recompensaPirata(Pirata,Recompensa), tripulante(Pirata,Tripulacion)), Recompensas),
+    tripulante(_,Tripulacion),
+    findall(Recompensa,
+    (recompensaPirata(Pirata,Recompensa), tripulante(Pirata,Tripulacion)), 
+    Recompensas),
     sum_list(Recompensas, RecompensaTotal).
 
 recompensaPirata(Pirata,RecompensaTotal):-
@@ -146,10 +157,13 @@ comio(smoker, fruta(logia, mokumoku, humo)).
 
 
 frutaPeligrosa(fruta(paramecia, opeope)).
-frutaPeligrosa(fruta(zoan, _, lobo)).
-frutaPeligrosa(fruta(zoan, _, leopardo)).
-frutaPeligrosa(fruta(zoan, _, anaconda)).
+frutaPeligrosa(fruta(zoan, _, Especie)):-
+    esFeroz(Especie).
 frutaPeligrosa(fruta(logia,_,_)).
+
+esFeroz(lobo).
+esFeroz(leopardo).
+esFeroz(anaconda).
 
 noPuedeNadar(Pirata):-
     comio(Pirata,_).
