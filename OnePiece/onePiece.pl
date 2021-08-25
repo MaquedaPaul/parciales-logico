@@ -105,6 +105,20 @@ seDestacoEn(Pirata,Evento):-
 */
 %3)
 
+/*
+MARIANA MATOS15:21
+uh, disculpá, no vi tu pregunta Pablo
+
+necesariamente tiene que estar en el antecedente (lo que usás para generar el universo sobre el cual vas a hacer la validación)
+
+MARIANA MATOS15:23
+al estar en en antecedente el planteo es "para todo monto de recompensa de piratas que participaron del evento (sin considerar al pirata destacado), se cumple que ese monto es menor que el del pirata destacado"
+si estuviera en el consecuente, lo que estarías diciendo es:
+"para todo pirata y monto de recompensa que existan para este evento, se cumple que el monto es menor y el pirata es distinto al destacado"
+*/
+
+
+
 pasoDesapercibido(Evento, Pirata):-
     tripulante(Pirata, Tripulacion),
     tripulacionParticipaEn(Tripulacion, Evento),
