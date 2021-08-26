@@ -30,17 +30,26 @@ cumple(vale, Tiempo):-
 %cumple(maiu,tiempo(dia(lunes), horario(0,8))).
 %cumple(maiu,tiempo(dia(martes), horario(0,8))).
 
-
+%Punto 2
 atiende(Empleado, DiaPuntual, HoraPuntual):-
     cumple(Empleado, 
     tiempo(dia(DiaPuntual), horario(HoraInicial, HoraFinal))),
     between(HoraInicial, HoraFinal, HoraPuntual).
 
 
-
-
 dia(tiempo(dia(Dia),_),Dia).
-
 horario(tiempo(_,horario(Comienzo,Final)),Comienzo,Final).
+
+%Punto 3
+
+
+foreverAlone(Hora, Dia, Empleado):-
+    distinct(Empleado, foreverAloneSub(Hora, Dia, Empleado)).
+
+foreverAloneSub(Hora, Dia, Empleado):-
+    atiende(Empleado, Dia, Hora),
+    not((atiende(OtroEmpleado, Dia, Hora), Empleado \= OtroEmpleado)).
+
+
 
 
