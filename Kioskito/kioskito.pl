@@ -6,6 +6,9 @@ cumple(dodain,tiempo(dia(viernes),horario(9,15))).
 
 cumple(lucas,tiempo(dia(martes),horario(10,20))).
 
+cumple(josesito,tiempo(dia(domingo),horario(0,12))).
+cumple(carlos,tiempo(dia(domingo),horario(12,24))).
+
 cumple(juanC,tiempo(dia(sabado),horario(18,22))).
 cumple(juanC,tiempo(dia(domingo),horario(18,22))).
 
@@ -51,5 +54,41 @@ foreverAloneSub(Hora, Dia, Empleado):-
     not((atiende(OtroEmpleado, Dia, Hora), Empleado \= OtroEmpleado)).
 
 
+posibilidadesDeAtencion(Dia, Empleado):-
+    distinct(Empleado, posibilidadesDeAtencionSub(Dia,Empleado)).
+
+posibilidadesDeAtencionSub(Dia,Empleado):-
+    not(horarioCompleto(Dia)),
+    Empleado = "nadie".
+
+posibilidadesDeAtencionSub(Dia, Empleado):-
+    atiende(Empleado, Dia, _).
+
+posibilidadesDeAtencionSub(Dia, Empleados):-
+    findall(([Empleado | OtrosEmpleados]), compartenHorario(Dia, Empleado, OtrosEmpleados), Empleados).
+
+
+
+
+horarioCompleto(Dia):-
+    cumple(_,tiempo(dia(Dia),_)),
+    forall(between(0,24,Hora), atiende(_,Dia, Hora)).
+
+
+compartenHorario(Dia, Empleado, OtroEmpleado):-
+    atiende(Empleado, Dia, Hora),
+    atiende(OtroEmpleado, Dia, Hora),
+    Empleado \= OtroEmpleado.
+
+
+/* quienAtiende == atiende
+posibilidadesAtencion(Dia, Personas):-
+  findall(Persona, distinct(Persona, quienAtiende(Persona, Dia, _)), PersonasPosibles),
+  combinar(PersonasPosibles, Personas).
+
+combinar([], []).
+combinar([Persona|PersonasPosibles], [Persona|Personas]):-combinar(PersonasPosibles, Personas).
+combinar([_|PersonasPosibles], Personas):-combinar(PersonasPosibles, Personas).
+*/
 
 
