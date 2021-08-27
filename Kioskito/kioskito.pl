@@ -82,13 +82,68 @@ compartenHorario(Dia, Empleado, OtroEmpleado):-
 
 
 /* quienAtiende == atiende
-posibilidadesAtencion(Dia, Personas):-
+posibilidadesAtencion2(Dia, Personas):-
   findall(Persona, distinct(Persona, quienAtiende(Persona, Dia, _)), PersonasPosibles),
   combinar(PersonasPosibles, Personas).
 
 combinar([], []).
 combinar([Persona|PersonasPosibles], [Persona|Personas]):-combinar(PersonasPosibles, Personas).
 combinar([_|PersonasPosibles], Personas):-combinar(PersonasPosibles, Personas).
-*/
 
+
+*/
+% Qué conceptos en conjunto resuelven este requerimiento
+% - findall como herramienta para poder generar un conjunto de soluciones que satisfacen un predicado
+% - mecanismo de backtracking de Prolog permite encontrar todas las soluciones posibles
+
+%Punto 5
+
+%vendio(Objeto, tiempo, Persona).
+vendio(golosinas(1200),tiempo(dia(lunes, 10), mes(8)),dodain).
+vendio(golosinas(50), tiempo(dia(lunes, 10), mes(8)),dodain).
+vendio(cigarrillo(jockey),tiempo(dia(lunes, 10), mes(8)),dodain).
+
+vendio(bebida(noAlcoholica, 1), tiempo(dia(lunes, 12), mes(8)),dodain).
+vendio(bebida(alcoholica, 8), tiempo(dia(lunes, 12), mes(8)),dodain).
+vendio(golosinas(10),tiempo(dia(miercoles, 12), mes(8)),dodain).
+
+vendio(cigarrillo(chesterfield), tiempo(dia(lunes, 12), mes(8)),martu).
+vendio(cigarrillo(colorado), tiempo(dia(lunes, 12), mes(8)),martu).
+vendio(cigarrillo(parisiennes), tiempo(dia(lunes, 12), mes(8)),martu).
+vendio(golosinas(1000),tiempo(dia(miercoles, 12), mes(8)),martu).
+
+vendio(bebida(noAlcoholica, 2),tiempo(dia(miercoles, 11), mes(8)),lucas).
+
+vendio(cigarrillo(derby),tiempo(dia(miercoles, 18), mes(8)),lucas).
+
+
+esSuertuda(Persona):-
+    findall(cigarrillo(Marca),primeraVenta(Persona, cigarrillo(Marca)), Marcas),
+    length(Marcas, Total),
+    Total > 2.
+
+esSuertuda(Persona):-
+    primeraVenta(Persona, Venta),
+    ventaImportante(Venta).
+
+ventaImportante(golosinas(Precio)):-
+    Precio > 100.
+
+
+ventaImportante(bebida(alcoholica,_)).
+
+ventaImportante(bebida(_,Cantidad)):-
+    Cantidad > 5.
+
+
+%Asumo que solamente va a ser dentro un año únicamente
+
+primeraVenta(Persona, Venta):-
+    vendio(Venta,TiempoAnterior,Persona),
+    forall(vendio(_, TiempoPosterior, Persona), anterior(TiempoAnterior, TiempoPosterior)).
+
+
+anterior(tiempo(_, mes(MesAnterior)), tiempo(_, mes(Mes))):- MesAnterior < Mes.
+anterior(tiempo(dia(_, NumeroAnterior), mes(Mes)),
+ tiempo(dia(_, Numero), mes(Mes))):- NumeroAnterior =< Numero.
 
