@@ -34,8 +34,6 @@ Hay tres tipos de conciertos:
 
 
 
-
-
 Queremos reflejar los siguientes conciertos:
 
 - Miku Expo, es un concierto gigante que se va a realizar en Estados Unidos, le brinda 2000 de fama al vocaloid que pueda participar en él y pide que el vocaloid sepa más de 2 canciones y el tiempo mínimo de 6 minutos.

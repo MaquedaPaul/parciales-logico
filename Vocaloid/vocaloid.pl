@@ -128,7 +128,13 @@ vocaloidMasFamoso(Vocaloid):-
     nivelDeFama(Vocaloid, Nivel),
     forall((nivelDeFama(OtroVocaloid, OtroNivel), Vocaloid \= OtroVocaloid), Nivel > OtroNivel).
 
+%conoceA(Vocaloid, Conocido).
+conoceA(megurineLuka, hatsuneMiku).
+conoceA(megurineLuka, gumi).
 
+conoceA(gumi, seeU).
+
+conoceA(megurineLuka, kaito).
 
 
 %Punto 4
