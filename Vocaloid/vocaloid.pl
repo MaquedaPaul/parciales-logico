@@ -128,24 +128,54 @@ vocaloidMasFamoso(Vocaloid):-
     nivelDeFama(Vocaloid, Nivel),
     forall((nivelDeFama(OtroVocaloid, OtroNivel), Vocaloid \= OtroVocaloid), Nivel > OtroNivel).
 
+
+%Punto 4
+
 %conoceA(Vocaloid, Conocido).
 conoceA(megurineLuka, hatsuneMiku).
 conoceA(megurineLuka, gumi).
 
 conoceA(gumi, seeU).
-
+conoceA(seeU, jorgito).
+conoceA(jorgito, pedrito ).
+conoceA(pedrito, carlos).
 conoceA(megurineLuka, kaito).
 
+esElUnicoQueParticipaEn(Vocaloid, Concierto):-
+    puedeParticiparEn(Vocaloid, Concierto),
+    forall((cadenaDeConocidos(Vocaloid, Conocidos),
+    member(Conocido, Conocidos)),
+    not(puedeParticiparEn(Conocido, Concierto))).
 
-%Punto 4
+cadenaDeConocidos(Vocaloid, [Conocido | Conocidos]):-
+    conoceA(Vocaloid, Conocido),
+    Vocaloid \= Conocido,
+    cadenaDeConocidos(Conocido, Conocidos).
+cadenaDeConocidos(_, []).
+
+
+
+%Conocido directo
+conocido(Cantante, OtroCantante) :- 
+conoce(Cantante, OtroCantante).
+
+%Conocido indirecto
+conocido(Cantante, OtroCantante) :- 
+conoce(Cantante, UnCantante), 
+conocido(UnCantante, OtroCantante).
 
 
 
 
 %Punto 5
+/*
+En la solución planteada habría que agregar una claúsula en el predicado cumpleRequisitos/2  que tenga en cuenta el nuevo functor con sus respectivos requisitos 
+
+El concepto que facilita los cambios para el nuevo requerimiento es el polimorfismo, que nos permite dar un tratamiento en particular a cada uno de los conciertos en la cabeza de la cláusula.
+*/
 
 
 
 
-%Punto 6
+
 
