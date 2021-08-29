@@ -17,7 +17,18 @@ satisfaceNecesidad(Integrante, Herramienta):-
     tiene(Integrante, Herramienta).
 
 satisfaceNecesidad(Integrante, herramienta(aspiradora(Potencia))):-
-    tiene(Integrante, Herramienta).
+    tiene(Integrante, herramienta(aspiradora(OtraPotencia))),
+    OtraPotencia >= Potencia.
+
+puedeRealizar(Integrante, Tarea):-
+    tiene(Integrante,_),
+    herramientasRequeridas(Tarea, Herramientas),
+    forall(member(Herramienta, Herramientas)
+    , satisfaceNecesidad(Integrante, herramienta)).
+
+puedeRealizar(Integrante, Tarea):-
+    herramientasRequeridas(Tarea,_),
+    tiene(Integrante, herramienta(varitaDeNeutrones)).
 
 
 
