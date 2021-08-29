@@ -25,4 +25,22 @@ yaPaso(Persona):-
     anteriorEnUnAnio(fecha(Dia, Mes), fecha(OtroDia, OtroMes)).
 
 
+%podriaRegalarle(OtroPersona, Persona, Fecha):-
+
+
+%regalo(Regalador, Regalado, Regalo, Fecha)-
+
+leRegalo(regalo(juan, feche, libroTP), 2018).
+leRegalo(regalo(juan, aye, productoHP), 2019).
+leRegalo(regalo(juan, aye, cervezaRoja), 2020).
+leRegalo(regalo(juan, feche, libroTP), 2021).
+
+leRegalo(regalo(aye, feche, libroTP), 2019).
+leRegalo(regalo(aye, juan, libroSL), 2020).
+
+leRegalo(regalo(feche, juan, cervezaRubia), 2019).
+leRegalo(regalo(feche, juan, productoP), 2020).
+leRegalo(regalo(feche, aye, libroMS), 2021).
+
+
 
