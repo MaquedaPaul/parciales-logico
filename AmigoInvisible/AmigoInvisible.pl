@@ -1,3 +1,5 @@
+ :-style_check(-discontiguous).
+
 %nacio(Fecha, Persona).
 nacio(fecha(9, 9, 1994), juan).
 nacio(fecha(26, 3, 1992), aye).
@@ -30,17 +32,17 @@ yaPaso(Persona):-
 
 %regalo(Regalador, Regalado, Regalo, Fecha)-
 
-leRegalo(juan, feche, libroTP, 2018).
-leRegalo(juan, aye, productoHP, 2019).
-leRegalo(juan, aye, cervezaRoja, 2020).
-leRegalo(juan, feche, libroTP, 2021).
+leRegalo(juan, feche, libro(terryPratchet, fantasia), 2018).
+leRegalo(juan, aye, producto(harryPotter), 2019).
+leRegalo(juan, aye, cerveza(artesanal,roja), 2020).
+leRegalo(juan, feche, cerveza(quilmes,rubia), 2021).
 
-leRegalo(aye, feche, libroTP, 2019).
-leRegalo(aye, juan, libroSL, 2020).
+leRegalo(aye, feche, libro(terryPratchet, fantasia), 2019).
+leRegalo(aye, juan, libro(stanislawLem, scifi), 2020).
 
-leRegalo(feche, juan, cervezaRubia, 2019).
-leRegalo(feche, juan, productoP, 2020).
-leRegalo(feche, aye, libroMS, 2021).
+leRegalo(feche, juan, cerveza(artesanal, rubia), 2019).
+leRegalo(feche, juan, producto(pokemon), 2020).
+leRegalo(feche, aye, libro(maryShelley, terror), 2021).
 
 podriaRegalarle(OtraPersona, Persona, Fecha):-
     nacio(_,OtraPersona),
@@ -53,6 +55,30 @@ podriaRegalarle(OtraPersona, Persona, Fecha):-
 
 recibioRegaloEn(Persona, Fecha):-
     leRegalo(_,Persona,_,Fecha).
+
+
+%Punto 3
+
+esBuenRegalo(Persona, Regalo):-
+    leGusta(Persona, Regalo).
+
+leGusta(aye, cerveza(heneiken, rubia)).
+leGusta(aye, producto(harryPotter)).
+leGusta(juan, libro(_, scifi)).
+leGusta(juan, libro(_, terror)).
+leGusta(juan, Regalo):-
+    esCaro(Regalo).
+
+autor(libro(Autor,_),Autor).
+
+leGusta(feche, producto(monsterHunster)).
+leGusta(feche, Libro):-
+    autor(Libro, terryPratchet),
+    not(esCaro(Libro)).
+
+esCaro(libro(rayBradbury, scifi)).
+esCaro(libro(_, novela)).
+esCaro(cerveza(artesanal, _)).
 
 
 
