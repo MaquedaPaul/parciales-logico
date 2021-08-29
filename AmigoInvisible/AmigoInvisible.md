@@ -23,6 +23,7 @@ Por ejemplo, el 20 de agosto de 2021 los cumpleaños de Aye y de Juan ya pasaron
 
 No es necesario que estos predicados sean inversibles respecto de las fechas y podemos asumir que las fechas que le pasemos siempre van a ser válidas.
 
+
 A quién puede regalar
 
 Los amigos invisibles no necesariamente están todos definidos desde el principio, se pueden ir decidiendo en el tiempo para permitir que más gente se pueda sumar al mismo sobre la marcha.
