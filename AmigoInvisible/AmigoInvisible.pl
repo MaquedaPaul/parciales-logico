@@ -100,4 +100,18 @@ regaloDosRegalosDistintos(Persona, Regalo, OtroRegalo):-
 esParecido(cerveza(_,_),cerveza(_,_)).
 esParecido(libro(_, Genero), libro(_, Genero)).
 
+recibioRegaloYLeGusto(Persona, Regalo):-
+    leRegalo(_, Persona, Regalo, _),
+    leGusta(Persona, Regalo).
+
+
+
+esMonotematico(Persona):-
+    nacio(_,Persona),
+    forall((recibioRegaloYLeGusto(Persona,Regalo),
+    recibioRegaloYLeGusto(Persona, OtroRegalo),
+    Regalo \= OtroRegalo),
+    esParecido(Regalo, OtroRegalo)).
+
+
 
