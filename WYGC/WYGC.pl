@@ -13,8 +13,11 @@ tiene(peter, herramienta(trapeador)).
 tiene(winston, herramienta(varitaDeNeutrones)).
 
 
+satisfaceNecesidad(Integrante, Herramienta):-
+    tiene(Integrante, Herramienta).
 
-
+satisfaceNecesidad(Integrante, herramienta(aspiradora(Potencia))):-
+    tiene(Integrante, Herramienta).
 
 
 
