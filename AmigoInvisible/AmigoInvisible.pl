@@ -81,5 +81,23 @@ esCaro(libro(_, novela)).
 esCaro(cerveza(artesanal, _)).
 
 
+habilRegalador(Persona):-
+    leRegalo(Persona, _, Regalo, _),
+    forall((leRegalo(Persona,OtraPersona,Regalo,_), Persona \= OtraPersona),
+    esBuenRegalo(OtraPersona, Regalo)),
+    nuncaHizoDosRegalosParecidos(Persona).
+
+
+nuncaHizoDosRegalosParecidos(Persona):-
+    forall(regaloDosRegalosDistintos(Persona, Regalo, OtroRegalo),
+    not(esParecido(Regalo, OtroRegalo))).
+
+regaloDosRegalosDistintos(Persona, Regalo, OtroRegalo):-
+    leRegalo(Persona,_,Regalo,_),
+    leRegalo(Persona,_,OtroRegalo,_),
+    Regalo \= OtroRegalo.
+
+esParecido(cerveza(_,_),cerveza(_,_)).
+esParecido(libro(_, Genero), libro(_, Genero)).
 
 
