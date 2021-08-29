@@ -48,9 +48,16 @@ seLeCobra(Cliente, Cobro):-
     tareaPedida(Cliente,_,_),
     findall(Precio, (tareaPedida(Cliente, Tarea, Metros), precio(Tarea, PrecioPorTarea), Precio is PrecioPorTarea * Metros), Cobro).
 
-
-
 %Punto 5
+
+aceptaria(Integrante, Cliente):-
+    tiene(Integrante, _),
+    tareaPedida(Cliente,_,_),
+    forall(tareaPedida(Cliente, Tarea, _), (puedeRealizar(Integrante, Tarea), estaDispuesto(Tarea, Integrante))).
+
+estaDispuesto(Tarea, ray):-
+    not(herramientasRequeridas(limpiarTecho,_)).
+
 
 
 
