@@ -5,6 +5,8 @@ herramientasRequeridas(cortarPasto, [bordedadora]).
 herramientasRequeridas(limpiarBanio, [sopapa, trapeador]).
 herramientasRequeridas(encerarPisos, [lustradpesora, cera, aspiradora(300)]).
 
+%Punto 1
+
 tiene(egon, herramienta(aspiradora(200))).
 
 tiene(egon, herramienta(trapeador)).
@@ -12,6 +14,7 @@ tiene(peter, herramienta(trapeador)).
 
 tiene(winston, herramienta(varitaDeNeutrones)).
 
+%Punto 2
 
 satisfaceNecesidad(Integrante, Herramienta):-
     tiene(Integrante, Herramienta).
@@ -19,6 +22,8 @@ satisfaceNecesidad(Integrante, Herramienta):-
 satisfaceNecesidad(Integrante, herramienta(aspiradora(Potencia))):-
     tiene(Integrante, herramienta(aspiradora(OtraPotencia))),
     OtraPotencia >= Potencia.
+
+%Punto 3
 
 puedeRealizar(Integrante, Tarea):-
     tiene(Integrante,_),
@@ -29,6 +34,28 @@ puedeRealizar(Integrante, Tarea):-
 puedeRealizar(Integrante, Tarea):-
     herramientasRequeridas(Tarea,_),
     tiene(Integrante, herramienta(varitaDeNeutrones)).
+
+%Punto 4
+
+tareaPedida/3.
+%tareaPedida(Cliente, TareaPedida, MetrosCuadrados).
+precio/2.
+%precio(Tarea, PrecioPorMetroCuadrado).
+
+
+
+seLeCobra(Cliente, Cobro):-
+    tareaPedida(Cliente,_,_),
+    findall(Precio, (tareaPedida(Cliente, Tarea, Metros), precio(Tarea, PrecioPorTarea), Precio is PrecioPorTarea * Metros), Cobro).
+
+
+
+%Punto 5
+
+
+
+%Punto 6
+
 
 
 
