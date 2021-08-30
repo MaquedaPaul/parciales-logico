@@ -27,10 +27,10 @@ yaPaso(Persona):-
     anteriorEnUnAnio(fecha(Dia, Mes), fecha(OtroDia, OtroMes)).
 
 
-%podriaRegalarle(OtroPersona, Persona, Fecha):-
+%podriaRegalarle(OtroPersona, Persona, Fecha).
 
 
-%regalo(Regalador, Regalado, Regalo, Fecha)-
+%regalo(Regalador, Regalado, Regalo, Fecha).
 
 leRegalo(juan, feche, libro(terryPratchet, fantasia), 2018).
 leRegalo(juan, aye, producto(harryPotter), 2019).
@@ -60,6 +60,7 @@ recibioRegaloEn(Persona, Fecha):-
 %Punto 3
 
 esBuenRegalo(Persona, Regalo):-
+    leRegalo(_,Persona,Regalo,_),
     leGusta(Persona, Regalo).
 
 leGusta(aye, cerveza(heneiken, rubia)).
@@ -72,9 +73,9 @@ leGusta(juan, Regalo):-
 autor(libro(Autor,_),Autor).
 
 leGusta(feche, producto(monsterHunster)).
-leGusta(feche, Libro):-
-    autor(Libro, terryPratchet),
-    not(esCaro(Libro)).
+
+leGusta(feche, libro(terryPratchet,_)):-
+    not(esCaro(libro(terryPratchet,_))).
 
 esCaro(libro(rayBradbury, scifi)).
 esCaro(libro(_, novela)).
@@ -113,5 +114,25 @@ esMonotematico(Persona):-
     Regalo \= OtroRegalo),
     esParecido(Regalo, OtroRegalo)).
 
+regaladorNinja(Persona):-
+    leRegalo(Persona,_,_,_),
+    buenosRegalos(Persona, BuenosRegalos),
+    regalosNinja(Persona, RegalosNinja),
+    length(RegalosNinja, TotalNinja),
+    length(BuenosRegalos, TotalBuenos),
+    TotalNinja >= TotalBuenos.
+
+buenosRegalos(Persona, BuenosRegalos):-
+    findall(BuenRegalo, (leRegalo(Persona, Regalado, BuenRegalo, _),
+    esBuenRegalo(Regalado, BuenRegalo)), BuenosRegalos).
+
+regalosNinja(Persona, RegalosNinja):-
+    findall(Regalo, esRegaloNinja(Regalo, Persona, _), RegalosNinja).
 
 
+esRegaloNinja(Regalo, Regalador, Regalado):-
+    leRegalo(Regalador, Regalado, Regalo,_),
+    leGusta(Regalador, Regalo).
+
+
+%esBuenRegalo no da la respuesta esperada, en su mayoría diría que es un parcial bien resuelto pero posiblemente se pueda mejorar.
