@@ -57,6 +57,9 @@ Ejemplos:
 
 No es necesario que el predicado sea inversible respecto de la fecha.
 
+
+
+
 Buenos regalos
 
 Estos son algunos de los posibles regalos:
