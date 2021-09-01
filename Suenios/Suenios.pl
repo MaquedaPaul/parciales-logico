@@ -21,13 +21,43 @@ persona(diego).
 %suenio(ser(Futbolista, Equipo), Persona).
 %suenio(ganar(Loteria,numeros(UnNumero,OtroNumero)), Persona).
 
-suenio(ganar(loteria,numeros(5,9)), gabriel).
+suenio(ganar(loteria, [5,9]), gabriel).
 suenio(ser(futbolista, arsenal), gabriel).
 
 suenio(ser(cantante, 100000), juan).
 
 suenio(ser(cantante(erucaSativa), 10000), macarena).
 
+
+esAmbicioso(Persona):-
+    suenio(_, Persona),
+    findall(Dificultad, (suenio(Suenio, Persona), dificultadQueGenera(Suenio, Dificultad)), Dificultades),
+    sum_list(Dificultades, TotalDificultad),
+    TotalDificultad > 20.
+
+dificultadQueGenera(ser(cantante, CantidadDiscosVendidos), Dificultad):-
+    CantidadDiscosVendidos > 500000,
+    Dificultad is 6.
+
+dificultadQueGenera(ser(cantante, CantidadDiscosVendidos), Dificultad):-
+    CantidadDiscosVendidos =< 500000,
+    Dificultad is 4.
+
+dificultadQueGenera(ganar(loteria, Numeros), Dificultad):-
+    length(Numeros, CantidadDeNumerosApostados),
+    Dificultad is 10 * CantidadDeNumerosApostados.
+
+dificultadQueGenera(ser(futbolista, Equipo), Dificultad):-
+    equipoChico(Equipo),
+    Dificultad is 3.
+
+dificultadQueGenera(ser(futbolista, Equipo), Dificultad):-
+    not(equipoChico(Equipo)),
+    Dificultad is 16.
+
+%equipoGrande().
+equipoChico(arsenal).
+equipoChico(aldosivi).
 
 
 
