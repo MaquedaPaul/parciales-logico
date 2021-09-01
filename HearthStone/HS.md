@@ -48,17 +48,24 @@ cartasCampo(jugador(_,_,_,_,_,Cartas), Cartas).
 Se pide modelar los predicados que permitan resolver los requerimientos indicados. Todos los predicados deben ser totalmente inversibles, a menos que se indique lo contrario.
 
 
-1) Relacionar un jugador con una carta que tiene. La carta podría estar en su mano, en el campo o en el mazo.
 
-2) Saber si un jugador es un guerrero. Es guerrero cuando todas las cartas que tiene, ya sea en el mazo, la mano o el campo, son criaturas.
+1)
+Relacionar un jugador con una carta que tiene. La carta podría estar en su mano, en el campo o en el mazo.
 
-3) Relacionar un jugador consigo mismo después de empezar el turno. Al empezar el turno, la primera carta del mazo pasa a estar en la mano y el jugador gana un punto de maná.
+2) 
+Saber si un jugador es un guerrero. Es guerrero cuando todas las cartas que tiene, ya sea en el mazo, la mano o el campo, son criaturas.
 
-4) Cada jugador, en su turno, puede jugar cartas.
-a) Saber si un jugador tiene la capacidad de jugar una carta, esto es verdadero cuando el jugador tiene igual o más maná que el costo de maná de la carta. 
+3) 
+Relacionar un jugador consigo mismo después de empezar el turno. Al empezar el turno, la primera carta del mazo pasa a estar en la mano y el jugador gana un punto de maná.
+
+4) 
+Cada jugador, en su turno, puede jugar cartas.
+a) 
+Saber si un jugador tiene la capacidad de jugar una carta, esto es verdadero cuando el jugador tiene igual o más maná que el costo de maná de la carta. 
 Este predicado no necesita ser inversible!
 
-b) Relacionar un jugador y las cartas que va a poder jugar en el próximo turno, una carta se puede jugar en el próximo turno si tras empezar ese turno está en la mano y además se cumplen las condiciones del punto 4.a.
+b) 
+Relacionar un jugador y las cartas que va a poder jugar en el próximo turno, una carta se puede jugar en el próximo turno si tras empezar ese turno está en la mano y además se cumplen las condiciones del punto 4.a.
 
 5) Conocer, de un jugador, todas las posibles jugadas que puede hacer en el próximo turno, esto es, el conjunto de cartas que podrá jugar al mismo tiempo sin que su maná quede negativo.
 
@@ -68,14 +75,20 @@ Importante: También hay formas de resolver este punto sin usar jugar/3.
 Tip: Pensar en explosión combinatoria.
 
 
-6) Relacionar a un jugador con el nombre de su carta más dañina.
+6) 
+Relacionar a un jugador con el nombre de su carta más dañina.
 
-7) Cuando un jugador juega una carta, él mismo y/o su rival son afectados de alguna forma:
 
-a) jugarContra/3. Modela la acción de jugar una carta contra un jugador. Relaciona a la carta, el jugador antes de que le jueguen la carta y el jugador después de que le jueguen la carta. Considerar que únicamente afectan al jugador las cartas de hechizo de daño.
+
+7) 
+Cuando un jugador juega una carta, él mismo y/o su rival son afectados de alguna forma:
+
+a)
+jugarContra/3. Modela la acción de jugar una carta contra un jugador. Relaciona a la carta, el jugador antes de que le jueguen la carta y el jugador después de que le jueguen la carta. Considerar que únicamente afectan al jugador las cartas de hechizo de daño.
 Este predicado no necesita ser inversible para la carta ni para el jugador antes de que le jueguen la carta.
 
-b) BONUS: jugar/3. Modela la acción de parte de un jugador de jugar una carta. Relaciona a la carta, el jugador que puede jugarla antes de hacerlo y el mismo jugador después de jugarla. En caso de ser un hechizo de cura, se aplicará al jugador y no a sus criaturas. No involucra al jugador rival (para eso está el punto a).
+b)
+BONUS: jugar/3. Modela la acción de parte de un jugador de jugar una carta. Relaciona a la carta, el jugador que puede jugarla antes de hacerlo y el mismo jugador después de jugarla. En caso de ser un hechizo de cura, se aplicará al jugador y no a sus criaturas. No involucra al jugador rival (para eso está el punto a).
 
 
 
