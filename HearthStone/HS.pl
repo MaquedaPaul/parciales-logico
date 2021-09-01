@@ -35,13 +35,17 @@ cartasCampo(jugador(_,_,_,_,_,Cartas), Cartas).
 %Punto 1
 
 tiene(Jugador, Carta):-
-    cartasCampo(Jugador, Carta).
+    cartasCampo(Jugador, Cartas),
+    member(Carta, Cartas).
+    
 
 tiene(Jugador, Carta):-
-    cartasMano(Jugador, Carta).
+    cartasMano(Jugador, Cartas),
+    member(Carta, Cartas).
 
 tiene(Jugador, Carta):-
-    cartasMazo(Jugador, Carta).
+    cartasMazo(Jugador, Cartas),
+    member(Carta, Cartas).
 
 
 %Punto 2
@@ -53,5 +57,31 @@ esGuerrero(Jugador):-
 esCriatura(criatura(_,_,_,_)).
 
 %Punto 3
+
+comienzoDeTurno(Jugador, ManaActual, CartasEnMano):-
+    tomaUnaCartaDelMazo(Jugador, CartasEnMano),
+    mana(Jugador, Mana),
+    ManaActual is Mana + 1.
+
+
+tomaUnaCartaDelMazo(Jugador, CartasEnManoActual):-
+    cartasMazo(Jugador, [Carta | _]),
+    cartasMano(Jugador, CartasEnMano),
+    append([Carta], CartasEnMano, CartasEnManoActual).
+
+%Punto 4
+
+puedeJugar(Jugador, Carta):-
+    mana(Jugador, Mana),
+    mana(Carta, ManaCarta),
+    Mana >= ManaCarta.
+
+couldUseInNextTurn(Player, Card):-
+    comienzoDeTurno(Player, ActualMana, CardsOnHand),
+    member(Card, CardsOnHand),
+    puedeJugar(Player, Card).
+
+
+
 
 
