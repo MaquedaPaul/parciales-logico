@@ -28,6 +28,7 @@ suenio(ser(cantante, 100000), juan).
 
 suenio(ser(cantante(erucaSativa), 10000), macarena).
 
+%Punto 2
 
 esAmbicioso(Persona):-
     suenio(_, Persona),
@@ -58,6 +59,26 @@ dificultadQueGenera(ser(futbolista, Equipo), Dificultad):-
 %equipoGrande().
 equipoChico(arsenal).
 equipoChico(aldosivi).
+
+
+tieneQuimica(Persona, campanita):-
+    creeEn(Persona, campanita),
+    suenio(Suenio, Persona),
+    dificultadQueGenera(Suenio, Dificultad),
+    Dificultad < 5.
+
+tieneQuimica(Persona, Personaje):-
+    creeEn(Persona, Personaje),
+    forall(suenio(Suenio, Persona), esPuro(Suenio)),
+    not(esAmbicioso(Persona)).
+
+
+esPuro(ser(futbolista,_)).
+esPuro(ser(cantante,CantidadDiscosVendidos)):-
+    CantidadDiscosVendidos < 200000.
+
+esPuro(ser(cantante(_),CantidadDiscosVendidos)):-
+    CantidadDiscosVendidos < 200000.
 
 
 
