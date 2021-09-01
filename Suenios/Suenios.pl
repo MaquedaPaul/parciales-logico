@@ -80,6 +80,42 @@ esPuro(ser(cantante,CantidadDiscosVendidos)):-
 esPuro(ser(cantante(_),CantidadDiscosVendidos)):-
     CantidadDiscosVendidos < 200000.
 
+%Punto 4
+
+amigos(Persona, Amigo):-
+    esAmigoDe(Persona, Amigo).
+
+amigos(Persona, Amigo):-
+    esAmigoDe(Amigo, Persona).
+
+esAmigoDe(campanita, reyesMagos).
+esAmigoDe(campanita, conejoDePascua).
+
+esAmigoDe(conejoDePascua, cavenaghi).
+
+puedeAlegrar(Personaje, Persona):-
+    tieneSuenioYQuimicaCon(Persona, Personaje),
+    not(estaEnfermo(Personaje)).
+
+puedeAlegrar(Personaje, Persona):-
+    tieneSuenioYQuimicaCon(Persona, Personaje),
+    cadenaDeAmigos(Personaje, Amigos),
+    member(Amigo, Amigos), 
+    not(estaEnfermo(Amigo)).
 
 
+cadenaDeAmigos(Persona, [Amigo | Amigos]):-
+    esAmigoDe(Persona, Amigo),
+    Persona \= Amigo,
+    cadenaDeAmigos(Amigo, Amigos).
+
+cadenaDeAmigos(_, []).
+
+tieneSuenioYQuimicaCon(Persona, Personaje):-
+    suenio(_, Persona),
+    tieneQuimica(Persona, Personaje).
+
+estaEnfermo(campanita).
+estaEnfermo(reyesMagos).
+estaEnfermo(conejoDePascua).
 
