@@ -84,3 +84,19 @@ elMasGrande(Localidad, Boliche):-
     entran(Boliche, Personas),
     forall((quedaEn(OtroBoliche, Localidad), OtroBoliche \= Boliche), (entran(OtroBoliche, OtrasPersonas), Personas > OtrasPersonas)).
 
+
+puedeAbastecer(Localidad, Personas):-
+    quedaEn(_,Localidad),
+    capacidadDeUnaLocalidad(Localidad, CapacidadTotal),
+    CapacidadTotal >= Personas.
+
+
+capacidadDeUnBoliche(Boliche, Capacidad):-
+    entran(Boliche, Capacidad).
+
+
+capacidadDeUnaLocalidad(Localidad, CapacidadTotal):-
+    quedaEn(_, Localidad),
+    findall(Capacidad, (quedaEn(Boliche, Localidad), capacidadDeUnBoliche(Boliche, Capacidad)), Capacidades),
+    sum_list(Capacidades, CapacidadTotal).
+
