@@ -44,6 +44,9 @@ soloParaBailar(Boliche):-
     boliche(Boliche),
     not(sirveComida(Boliche)).
 
+podemosIrConEsa(Localidad):-
+    quedaEn(_, Localidad),
+    forall(quedaEn(Boliche, Localidad), esPiola(Boliche)).
 
 
 
