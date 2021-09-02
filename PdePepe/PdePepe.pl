@@ -79,4 +79,8 @@ puntaje(Boliche, Puntaje):-
 pasanUnaCancion(Cancion, Canciones):-
     member(Cancion, Canciones).
 
+elMasGrande(Localidad, Boliche):-
+    quedaEn(Boliche, Localidad),
+    entran(Boliche, Personas),
+    forall((quedaEn(OtroBoliche, Localidad), OtroBoliche \= Boliche), (entran(OtroBoliche, OtrasPersonas), Personas > OtrasPersonas)).
 
