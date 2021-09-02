@@ -48,8 +48,35 @@ podemosIrConEsa(Localidad):-
     quedaEn(_, Localidad),
     forall(quedaEn(Boliche, Localidad), esPiola(Boliche)).
 
+puntaje(Boliche, Puntaje):-
+    esDeTipo(Boliche, tematico(ochentoso)),
+    Puntaje is 9.
+
+puntaje(Boliche, Puntaje):-
+    esDeTipo(Boliche, tematico(Tematica)),
+    Tematica \= ochentoso,
+    Puntaje is 7.
 
 
+puntaje(Boliche, Puntaje):-
+    esDeTipo(Boliche, electronico(_,HoraInicio,HoraFinal)),
+    Puntaje is HoraFinal + HoraInicio.
 
+puntaje(Boliche, Puntaje):-
+    esDeTipo(Boliche,
+         cachengue(Canciones)),
+    pasanUnaCancion(biodiesel, Canciones),
+    pasanUnaCancion(buenComportamiento, Canciones),
+    Puntaje is 10.
+
+puntaje(Boliche, Puntaje):-
+    esDeTipo(Boliche,
+         cachengue(Canciones)),
+    not(pasanUnaCancion(biodiesel, Canciones)),
+    not(pasanUnaCancion(buenComportamiento, Canciones)),
+    Puntaje = "No lo sabemos".
+
+pasanUnaCancion(Cancion, Canciones):-
+    member(Cancion, Canciones).
 
 
