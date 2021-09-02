@@ -81,6 +81,17 @@ couldUseInNextTurn(Player, Card):-
     member(Card, CardsOnHand),
     puedeJugar(Player, Card).
 
+nextTurn(Player, ActualMana, CardsOnHand):-
+    tomaUnaCartaDelMazo(Player, CardsOnHand),
+    tomaUnaCartaDelMazo(Player, CardsOnHand),
+    mana(Player, Mana),
+    ActualMana is Mana + 2.
+
+
+%Exercise 5
+
+%possiblePlay()
+
 
 
 
