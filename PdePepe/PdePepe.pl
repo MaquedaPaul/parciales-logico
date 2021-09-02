@@ -25,6 +25,16 @@ esDeTipo(qma, electronico(djFenich, 2, 5)).
 
 
 
+esPiola(generalLasHeras):-
+    sirveComida(generalLasHeras).
+
+esPiola(Boliche):-
+    esGrande(Boliche),
+    sirveComida(Boliche).
+
+esGrande(Boliche):-
+    entran(Boliche, Personas),
+    Personas > 700.
 
 
 

@@ -27,9 +27,7 @@ esDeTipo(masDe40, tematico(ochentoso)).
 esDeTipo(qma, electronico(djFenich, 2, 5)).
 Hacé los siguientes predicados teniendo en cuenta que deben ser totalmente inversibles.
 
-1) esPiola/1: sabemos que un boliche es piola cuando queda en General Las Heras o
-cuando es grande, es decir, entran más de 700 personas. En ambos casos es
-necesario que sirvan comida.
+1) esPiola/1: sabemos que un boliche es piola cuando queda en General Las Heras o cuando es grande, es decir, entran más de 700 personas. En ambos casos es necesario que sirvan comida.
 
 2) soloParaBailar/1: un boliche es solo para bailar cuando no sirve comida.
 
