@@ -100,3 +100,22 @@ capacidadDeUnaLocalidad(Localidad, CapacidadTotal):-
     findall(Capacidad, (quedaEn(Boliche, Localidad), capacidadDeUnBoliche(Boliche, Capacidad)), Capacidades),
     sum_list(Capacidades, CapacidadTotal).
 
+
+quedaEn(trabajamosYNosDivertimos, concordia).
+esDeTipo(trabajamosYNosDivertimos,tematica(500)).
+entran(trabajamosYNosDivertimos,500).
+sirveComida(trabajamosYNosDivertimos).
+
+
+quedaEn(elFInDelMundo, ushuaia).
+esDeTipo(elFInDelMundo,electronico(djLuis,0,6)).
+entran(elFInDelMundo,1500).
+
+
+
+quedaEn(misterio, _).
+quedaEnPais(misterio, argentina).
+esGrande(misterio).
+esDeTipo(misterio, _).
+entran(misterio,1000000).
+sirveComida(misterio).
