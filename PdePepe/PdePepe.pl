@@ -37,6 +37,14 @@ esGrande(Boliche):-
     Personas > 700.
 
 
+boliche(Boliche):-
+    quedaEn(Boliche,_).
+
+soloParaBailar(Boliche):-
+    boliche(Boliche),
+    not(sirveComida(Boliche)).
+
+
 
 
 
