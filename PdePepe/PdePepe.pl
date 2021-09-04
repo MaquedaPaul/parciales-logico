@@ -113,9 +113,9 @@ entran(elFInDelMundo,1500).
 
 
 
-quedaEn(misterio, _).
 quedaEnPais(misterio, argentina).
 esGrande(misterio).
-esDeTipo(misterio, _).
 entran(misterio,1000000).
 sirveComida(misterio).
+
+
