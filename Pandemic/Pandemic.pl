@@ -47,7 +47,7 @@ esMedico(Personaje):-
     personaje(Personaje, medico).
 
 
-puedeCurar(Personaje, Ciudad):-
+puedeCurar(Personaje, _):-
     esMedico(Personaje).
     %cantidadAcciones(Personaje, Acciones),
     %Acciones >= 1.
@@ -55,7 +55,7 @@ puedeCurar(Personaje, Ciudad):-
 puedeCurar(Personaje, Ciudad):-
     cantInfecciones(Ciudad, CantInfecciones),
     cantidadAcciones(Personaje, Acciones),
-    Acciones >= cantInfecciones.
+    Acciones >= CantInfecciones.
 
 
 cantidadAcciones(Personaje, Acciones):-
@@ -92,7 +92,7 @@ seTienenReqsParaPrevenirBrote(plaga(Plaga, _)):-
     not(infeccion(OtraCiudad, Plaga)),
     OtraCiudad \= Ciudad.
 
-seTienenReqsParaPrevenirBrote(virus(Infectados, tratamiento(Tratamiento))):-
+seTienenReqsParaPrevenirBrote(virus(_, tratamiento(Tratamiento))):-
     tarjeta(_, tratamiento(Tratamiento)).
 
 
@@ -100,17 +100,60 @@ enfermedadesDeUnaCiudad(Ciudad, Infecciones):-
     infeccion(Ciudad,_),
     findall(Infeccion, infeccion(Ciudad, Infeccion), Infecciones).
 
-
-
 %Punto 5
+%infeccion(londres, plaga(pesteNegra, 10)).
+/* a. por ejemplo, deberíamos modificar los
+siguientes predicados: infeccion(Ciudad, nuevaInfeccion(Infectados, OtroParametro))
+y añadir el requisito necesario para prevenir un nuevo brote
+seTienenReqsParaPrevenirBrote(nuevaInfeccion(Infectados, OtroParametro)).
+También se pueden añadir muchos más parametros, o reducir según convenga
+No necesariamente tienen que ser 2.
 
+b.  Si quisiéramos agregar una nueva enfermedad, por polimorfismo 
+(bien aplicado), resulta sencillo.
 
+c. Los dos casos más claros de polimorfismo son infeccion() y 
+seTienenReqsParaPrevenirBrote(). Me dí cuenta de usarlos porque resultaría incómodo
+escribir predicados por cada variante de infección, desde el momento
+en que se decide utilizar infeccion(), habría que repetir mucha lógica
+sino tuviéramos el polimorfismo (para contemplar cada caso), en cambio
+con el polimorfismo puedo simplemente pensar en "Infeccion" y no en su
+complejidad según la infección que sea.
 
-
-
+*/
 %Punto 6
 
+accionesNecesarias(Ciudad, OtraCiudad, Accion):-
+    ciudad(OtraCiudad),
+    cadenaDeConexiones(Ciudad, Ciudades),
+    nth1(Accion, Ciudades, OtraCiudad),
+    forall(nth1(OtraAccion, Ciudades, OtraCiudad)
+    , Accion =< OtraAccion).
 
+
+accionesNecesarias(Ciudad, Ciudad, 0).
+
+viaje(Personaje, CiudadDestino, Acciones):-
+    ubicacion(Personaje, CiudadOrigen),
+    accionesNecesarias(CiudadOrigen, CiudadDestino, Acciones).
+
+
+viaje(Personaje, CiudadDestino, 1):-
+    tarjeta(Personaje, ciudad(CiudadDestino)),
+    ubicacion(Personaje, CiudadOrigen),
+    CiudadOrigen \= CiudadDestino.
+
+
+
+
+
+
+
+cadenaDeConexiones(Ciudad, [OtraCiudad | Ciudades]):-
+    conectada(Ciudad, OtraCiudad),
+    Ciudad \= OtraCiudad,
+    cadenaDeConexiones(OtraCiudad, Ciudades).
+cadenaDeConexiones(_, []).
 
 %Punto 7
 
