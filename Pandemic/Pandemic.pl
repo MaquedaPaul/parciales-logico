@@ -79,6 +79,29 @@ esCurable(Ciudad):-
 
 
 
+puedenSerErradicadas(Ciudad):-
+    puedeCurar(_,Ciudad),
+    forall(enfermedadesDeUnaCiudad(Ciudad, Infecciones),(
+    member(Infeccion, Infecciones), seTienenReqsParaPrevenirBrote(Infeccion))
+    ).
+
+
+seTienenReqsParaPrevenirBrote(bacteria(_)).
+seTienenReqsParaPrevenirBrote(plaga(Plaga, _)):-
+    infeccion(Ciudad, Plaga),
+    not(infeccion(OtraCiudad, Plaga)),
+    OtraCiudad \= Ciudad.
+
+seTienenReqsParaPrevenirBrote(virus(Infectados, tratamiento(Tratamiento))):-
+    tarjeta(_, tratamiento(Tratamiento)).
+
+
+enfermedadesDeUnaCiudad(Ciudad, Infecciones):-
+    infeccion(Ciudad,_),
+    findall(Infeccion, infeccion(Ciudad, Infeccion), Infecciones).
+
+
+
 %Punto 5
 
 
