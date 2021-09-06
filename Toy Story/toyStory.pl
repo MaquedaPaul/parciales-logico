@@ -189,3 +189,12 @@ puedePrestar(Duenio, OtraPersona, Juguete):-
     CantidadDeJuguetes > CantidadDeOtrosJuguetes.
 
 
+podriaDonar(Duenio, JuguetesPropios, CantidadFelicidad):-
+    duenio(Duenio,_,_),
+    juguetesDe(Duenio, Juguetes),
+    forall(member(Juguete, JuguetesPropios), member(Juguete, Juguetes)),
+    findall(Felicidad, (member(Juguete, JuguetesPropios), felicidadQueOtorga(Juguete, Felicidad)), Felicidades),
+    sum_list(Felicidades, TotalFelicidad),
+    CantidadFelicidad > TotalFelicidad.
+
+
