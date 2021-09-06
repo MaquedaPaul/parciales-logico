@@ -1,9 +1,11 @@
+:-style_check(-discontiguous).
+
 %Tenemos la siguiente base de conocimientos de ejemplo:
 % Relaciona al dueño con el nombre del juguete
 %y la cantidad de años que lo ha tenido
 duenio(andy, woody, 8).
 duenio(sam, jessie, 3).
-duenio(woody, caraDePapa, 3).
+duenio(jorge, seniorCaraDePapa, 3).
 % Relaciona al juguete con su nombre
 % los juguetes son de la forma:
 % deTrapo(tematica)
@@ -23,6 +25,7 @@ original(pieDerecho)])).
 esRaro(deAccion(stacyMalibu, 1, [sombrero])).
 % Dice si una persona es coleccionista
 esColeccionista(sam).
+
 
 %Punto 1
 tematicaDeUnJuguete(NombreDelJuguete, TematicaDelJuguete):-
