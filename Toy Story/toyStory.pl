@@ -20,7 +20,8 @@ juguete(soldados, miniFiguras(soldado, 60)).
 juguete(monitosEnBarril, miniFiguras(mono, 50)).
 juguete(seniorCaraDePapa,
 caraDePapa([ original(pieIzquierdo),
-original(pieDerecho)])).
+original(pieDerecho),
+repuesto(nariz)])).
 
 % Dice si un juguete es raro
 esRaro(deAccion(stacyMalibu, 1, [sombrero])).
@@ -103,10 +104,73 @@ lePertenecen(Duenio, Juguete, OtroJuguete):-
     Juguete \= OtroJuguete.
 
 
-
-
 %Punto 5
+
+felicidad(Duenio, FelicidadTotal):-
+    juguetesDe(Duenio, Juguetes),
+    findall(Felicidad, (member(Juguete, Juguetes), felicidadQueOtorga(Juguete, Felicidad)), Felicidades),
+    sum_list(Felicidades, FelicidadTotal).   
+
+juguetesDe(Duenio, Juguetes):-
+    duenio(Duenio, _,_),
+    findall(Juguete, duenio(Duenio, Juguete, _), Juguetes).
+
+felicidadQueOtorga(Juguete, Felicidad):-
+    juguete(Juguete, miniFiguras(_,Figuras)),
+    Felicidad is 20 * Figuras.
+
+felicidadQueOtorga(Juguete, Felicidad):-
+    juguete(Juguete, caraDePapa(Piezas)),
+    piezasDeRepuesto(Piezas, Repuestos),
+    piezasOriginales(Piezas, Originales),
+    felicidadTotalPiezasDeRepuesto(Repuestos, FelicidadTotalPorRepuesto),
+    felicidadTotalPiezasOriginales(Originales, FelicidadTotalPorOriginal),
+    Felicidad is FelicidadTotalPorOriginal + FelicidadTotalPorRepuesto.
+
+felicidadQueOtorga(Juguete, 100):-
+    juguete(Juguete, deTrapo(_)).
+
+felicidadQueOtorga(Juguete, 120):-
+    juguete(Juguete, deAccion(_,_)),
+    esDeColeccion(Juguete),
+    duenio(Duenio, Juguete, _),
+    esColeccionista(Duenio).
+
+felicidadQueOtorga(Juguete, 100):-
+    juguete(Juguete, deAccion(_,_)).
+
+
+
+piezasDeRepuesto(Piezas, Repuestos):-
+    findall(Repuesto, (member(Repuesto, Piezas),
+    esPiezaRepuesto(Repuesto))
+    , Repuestos).
+
+piezasOriginales(Piezas, Originales):-
+    findall(Original, (member(Original, Piezas),
+    esOriginal(Original))
+    , Originales).
+
+esPiezaRepuesto(repuesto(_)).
+
+felicidadPiezaRepuesto(repuesto(_),8).
+
+felicidadPiezaOriginal(original(_),5).
+
+felicidadTotalPiezasDeRepuesto(Repuestos, FelicidadTotalPorRepuesto):-
+    findall(FelicidadPorRepuesto, (member(Repuesto, Repuestos),felicidadPiezaRepuesto(Repuesto, FelicidadPorRepuesto))
+    , ListaFelicidadesPorPiezaRepuesto),
+    sum_list(ListaFelicidadesPorPiezaRepuesto, FelicidadTotalPorRepuesto).
+
+
+felicidadTotalPiezasOriginales(Originales, FelicidadTotalPorOriginal):-
+    findall(FelicidadPorOriginal, (member(Original, Originales),felicidadPiezaOriginal(Original, FelicidadPorOriginal))
+    , ListaFelicidadesPorPiezaOriginal),
+    sum_list(ListaFelicidadesPorPiezaOriginal, FelicidadTotalPorOriginal).
+
 
 
 %Punto 6
+
+
 
