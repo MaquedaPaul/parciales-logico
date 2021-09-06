@@ -4,6 +4,7 @@
 % Relaciona al dueño con el nombre del juguete
 %y la cantidad de años que lo ha tenido
 duenio(andy, woody, 8).
+duenio(andy, buzz, 2).
 duenio(sam, jessie, 3).
 duenio(jorge, seniorCaraDePapa, 3).
 % Relaciona al juguete con su nombre
@@ -84,9 +85,24 @@ tieneTodasSusPiezasOriginales(CaraDePapa):-
 
 esOriginal(original(_)).
 
-
-
 %Punto 4
+
+duoDinamico(Duenio, Juguete, OtroJuguete):-
+    lePertenecen(Duenio, Juguete, OtroJuguete),
+    hacenBuenaPareja(Juguete, OtroJuguete).
+
+hacenBuenaPareja(Juguete, OtroJuguete):-
+    tematicaDeUnJuguete(Juguete, Tematica),
+    tematicaDeUnJuguete(OtroJuguete, Tematica).
+
+hacenBuenaPareja(woody, buzz).
+
+lePertenecen(Duenio, Juguete, OtroJuguete):-
+    duenio(Duenio, Juguete,_),
+    duenio(Duenio, OtroJuguete,_),
+    Juguete \= OtroJuguete.
+
+
 
 
 %Punto 5
