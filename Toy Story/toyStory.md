@@ -36,8 +36,7 @@ Nota: siempre que nos refiramos al functor que representa al juguete le diremos 
 
 2. amigoFiel/2: Relaciona a un dueño con el nombre del juguete que no sea de plástico que tiene hace más tiempo. Debe ser completamente inversible.
 
-3. superValioso/1: Genera los nombres de juguetes de colección que tengan todas sus piezas
-originales, y que no estén en posesión de un coleccionista.
+3. superValioso/1: Genera los nombres de juguetes de colección que tengan todas sus piezas originales, y que no estén en posesión de un coleccionista.
 
 4. dúoDinámico/3: Relaciona un dueño y a dos nombres de juguetes que le pertenezcan que hagan buena pareja. Dos juguetes distintos hacen buena pareja si son de la misma temática. Además woody y buzz hacen buena pareja. Debe ser complemenente inversible.
 

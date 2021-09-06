@@ -3,6 +3,7 @@
 %y la cantidad de años que lo ha tenido
 duenio(andy, woody, 8).
 duenio(sam, jessie, 3).
+duenio(woody, caraDePapa, 3).
 % Relaciona al juguete con su nombre
 % los juguetes son de la forma:
 % deTrapo(tematica)
@@ -16,8 +17,7 @@ juguete(soldados, miniFiguras(soldado, 60)).
 juguete(monitosEnBarril, miniFiguras(mono, 50)).
 juguete(seniorCaraDePapa,
 caraDePapa([ original(pieIzquierdo),
-original(pieDerecho),
-repuesto(nariz) ])).
+original(pieDerecho)])).
 
 % Dice si un juguete es raro
 esRaro(deAccion(stacyMalibu, 1, [sombrero])).
@@ -40,10 +40,47 @@ tematica(miniFiguras(Tematica,_), Tematica).
 esJugueteCaraDePapa(seniorCaraDePapa).
 
 
+esDePlastico(Juguete):-
+    juguete(Juguete, miniFiguras(_,_)).
+
+esDePlastico(Juguete):-
+    juguete(Juguete, _),
+    esJugueteCaraDePapa(Juguete).
+
+esDeColeccion(Juguete):-
+    juguete(Juguete, deAccion(_,_)),
+    esRaro(Juguete).
+
+esRaro(Juguete):-
+    juguete(Juguete, deTrapo(_)).
+
+
 %Punto 2
+
+amigoFiel(Duenio, Juguete):-
+    tieneJugueteQueNoEsDePlastico(Duenio, Juguete, Anios),
+    forall((tieneJugueteQueNoEsDePlastico(Duenio, OtroJuguete, OtrosAnios),Juguete \= OtroJuguete), Anios > OtrosAnios).
+
+
+tieneJugueteQueNoEsDePlastico(Duenio, Juguete, Anios):-
+    juguete(Juguete, _),
+    not(esDePlastico(Juguete)),
+    duenio(Duenio, Juguete, Anios).
 
 
 %Punto 3
+
+superValioso(Juguete):-
+    duenio(Duenio, Juguete, _),
+    tieneTodasSusPiezasOriginales(Juguete),
+    not(esColeccionista(Duenio)).
+
+tieneTodasSusPiezasOriginales(CaraDePapa):-
+    juguete(CaraDePapa, caraDePapa(Piezas)),
+    forall(member(Pieza, Piezas), esOriginal(Pieza)).
+
+esOriginal(original(_)).
+
 
 
 %Punto 4
