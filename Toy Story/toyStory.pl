@@ -172,5 +172,20 @@ felicidadTotalPiezasOriginales(Originales, FelicidadTotalPorOriginal):-
 
 %Punto 6
 
+puedeJugarCon(Duenio, Juguete):-
+    duenio(Duenio, Juguete,_).
+
+puedeJugarCon(Duenio, Juguete):-
+    puedeJugarCon(OtroDuenio, Juguete),
+    puedePrestar(OtroDuenio, Duenio, Juguete).
+
+puedePrestar(Duenio, OtraPersona, Juguete):-
+    duenio(Duenio, Juguete,_),
+    not(duenio(OtraPersona, Juguete,_)),
+    juguetesDe(Duenio, Juguetes),
+    juguetesDe(OtraPersona, OtrosJuguetes),
+    length(Juguetes, CantidadDeJuguetes),
+    length(OtrosJuguetes, CantidadDeOtrosJuguetes),
+    CantidadDeJuguetes > CantidadDeOtrosJuguetes.
 
 
