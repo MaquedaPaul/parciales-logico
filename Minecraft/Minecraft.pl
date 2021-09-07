@@ -34,6 +34,10 @@ cantidadDeItem(Jugador, Item, Cantidad):-
     itemsIdenticos(Item, Items, ItemsIdenticos),
     length(ItemsIdenticos, Cantidad).
 
+cantidadDeItem(Jugador, Item, 0):-
+    jugador(Jugador,_,_),
+    not(tieneItem(Jugador, Item)).
+
 itemsIdenticos(Item, Items, ItemsIdenticos):-
     findall(ItemIdentico, (member(ItemIdentico, Items), ItemIdentico == Item)
     , ItemsIdenticos).
@@ -43,3 +47,55 @@ tieneMasDe(Jugador, Item):-
     forall((cantidadDeItem(OtroJugador, Item, OtraCantidad), Jugador \= OtroJugador), Cantidad > OtraCantidad).
 
 
+hayMonstruos(Lugar):-
+    lugar(Lugar,_,NivelDeOscuridad),
+    NivelDeOscuridad > 6.
+
+correPeligro(Jugador):-
+    lugar(Lugar,_,_),
+    hayMonstruos(Lugar),
+    seEncuentraEnLugar(Jugador, Lugar).
+
+correPeligro(Jugador):-
+    estaHambriento(Jugador),
+    not(tieneItemComestible(Jugador)).
+
+estaHambriento(Jugador):-
+    jugador(Jugador,_,Hambre),
+    Hambre < 4.
+
+tieneItemComestible(Jugador):-
+    tieneItem(Jugador, Item),
+    comestible(Item).
+
+seEncuentraEnLugar(Jugador, Lugar):-
+    lugar(Lugar, Jugadores,_),
+    member(Jugador, Jugadores).
+
+nivelPeligrosidad(Lugar, NivelPeligrosidad):-
+    lugar(Lugar,_,_),
+    not(hayMonstruos(Lugar)),
+    porcentajeDeHambrientos(Lugar, NivelPeligrosidad).
+
+nivelPeligrosidad(Lugar, 100):-
+    lugar(Lugar,_,_),
+    hayMonstruos(Lugar).
+
+nivelPeligrosidad(Lugar, NivelDePeligrosidad):-
+    lugar(Lugar,_,NivelDeOscuridad),
+    not(estaPoblado(Lugar)),
+    NivelDePeligrosidad is 10* NivelDeOscuridad.
+
+estaPoblado(Lugar):-
+    lugar(Lugar,Jugadores,_),
+    member(_, Jugadores).
+
+
+porcentajeDeHambrientos(Lugar, Porcentaje):-
+    lugar(Lugar,Jugadores,_),
+    findall(JugadorHambriento, (member(JugadorHambriento, Jugadores), estaHambriento(JugadorHambriento)), JugadoresHambrientos),
+    length(Jugadores, CantidadTotal),
+    length(JugadoresHambrientos, Cantidad),
+Porcentaje is (Cantidad * 100)/CantidadTotal.
+    
+    
