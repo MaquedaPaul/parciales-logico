@@ -37,7 +37,32 @@ tieneEmpleados(Personaje, Empleados):-
 
 
 
+duoTemible(Personaje, OtroPersonaje):-
+    sonPeligrosos(Personaje, OtroPersonaje),
+    sonPareja(Personaje, OtroPersonaje).
+
+duoTemible(Personaje, OtroPersonaje):-
+    sonPeligrosos(Personaje, OtroPersonaje),
+    sonAmigos(Personaje, OtroPersonaje).
+
+sonPeligrosos(Personaje, OtroPersonaje):-
+    esPeligroso(Personaje),
+    esPeligroso(OtroPersonaje),
+    Personaje \= OtroPersonaje.
 
 
+sonPareja(Personaje, OtroPersonaje):-
+    pareja(Personaje, OtroPersonaje).
 
+sonPareja(Personaje, OtroPersonaje):-
+    pareja(OtroPersonaje, Personaje).
 
+sonAmigos(Personaje, OtroPersonaje):-
+    amigo(Personaje, OtroPersonaje).
+
+sonAmigos(Personaje, OtroPersonaje):-
+    amigo(OtroPersonaje, Personaje).
+
+amigo(vincent, jules).
+amigo(jules, jimmie).
+amigo(vincent, elVendedor).
