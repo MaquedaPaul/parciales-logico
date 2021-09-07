@@ -66,3 +66,30 @@ sonAmigos(Personaje, OtroPersonaje):-
 amigo(vincent, jules).
 amigo(jules, jimmie).
 amigo(vincent, elVendedor).
+
+%encargo(Solicitante, Encargado, Tarea). 
+%las tareas pueden ser cuidar(Protegido), ayudar(Ayudado), buscar(Buscado, Lugar)
+encargo(marsellus, vincent,   cuidar(mia)).
+encargo(vincent,  elVendedor, cuidar(mia)).
+encargo(marsellus, winston, ayudar(jules)).
+encargo(marsellus, winston, ayudar(vincent)).
+encargo(marsellus, vincent, buscar(butch, losAngeles)).
+
+
+estaEnProblemas(butch).
+
+estaEnProblemas(Personaje):-
+    jefePeligroso(Personaje, Jefe),
+    encargo(Jefe, Personaje, cuidar(Pareja)),
+    sonPareja(Jefe, Pareja).
+
+
+estaEnProblemas(Personaje):-
+    jefePeligroso(Personaje, Jefe),
+    encargo(Jefe, Personaje, buscar(_, _)).
+
+jefePeligroso(Personaje, Jefe):-
+    trabajaPara(Jefe, Personaje),
+    esPeligroso(Jefe).
+
+
