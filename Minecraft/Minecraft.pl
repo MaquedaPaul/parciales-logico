@@ -108,7 +108,17 @@ item(antorcha, [ itemCompuesto(palo), itemSimple(carbon, 1) ]).
 puedeConstruir(Jugador, Item):-
     jugador(Jugador,_,_),
     item(Item, ItemsNecesariosParaConstruir),
-    forall(tieneItem(Jugador, ItemNecesario), Action)
-    
+    forall(member(ItemNecesario, ItemsNecesariosParaConstruir), tieneItemNecesario(Jugador, ItemNecesario)).
+
+
+tieneItemNecesario(Jugador, itemCompuesto(Item)):-
+    tieneItem(Jugador, Item).
+tieneItemNecesario(Jugador, itemCompuesto(Item)):-
+    puedeConstruir(Jugador, Item),
+    not(tieneItem(Jugador, Item)).
+
+tieneItemNecesario(Jugador, itemSimple(Item, Cantidad)):-
+    cantidadDeItem(Jugador, Item, CantidadQueTiene),
+    CantidadQueTiene >= Cantidad.
 
 

@@ -74,9 +74,12 @@ Aclaración: Considerar a los componentes de los ítems compuestos y a los ítem
 4) Para pensar sin bloques
 
 a. ¿Qué sucede si se consulta el nivel de peligrosidad del desierto? ¿A qué se debe?
+Da false porque no está contemplado en nuestra base de conocimientos. Prolog trabaja con un concepto de universo cerrado, aquello que no esté dentro de nuestro universo da False automáticamente. Aquellos que sí estén, deben cumplir condiciones según la consulta que queramos hacer.
+
 
 b. ¿Cuál es la ventaja que nos ofrece el paradigma lógico frente a funcional a la hora de realizar una consulta?
 
+Al trabajar con relaciones, el paradigma lógico nos permite obtener mucha más información sin tener que escribir mucho código. Con más información me refiero a la inversibilidad en los predicados, si son completamente inversibles podemos consultar por cada átomo del predicado y obtener una respuesta. Y si lo dejamos como "variables genéricas", Prolog es capaz de matchear y encontrar los respectivos resultados. En funcional, como su nombre lo indica, se trabaja con funciones y por tanto, espera que le pasemos parámetros para que devuelva un resultado.
 
 
 
