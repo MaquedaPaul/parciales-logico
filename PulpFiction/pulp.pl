@@ -72,6 +72,7 @@ amigo(vincent, elVendedor).
 encargo(marsellus, vincent,   cuidar(mia)).
 encargo(vincent,  elVendedor, cuidar(mia)).
 encargo(marsellus, winston, ayudar(jules)).
+encargo(marsellus, winston, ayudar(carlitos)).
 encargo(marsellus, winston, ayudar(vincent)).
 encargo(marsellus, vincent, buscar(butch, losAngeles)).
 
@@ -102,4 +103,14 @@ tieneCerca(Personaje, OtroPersonaje):-
 
 tieneCerca(Personaje, OtroPersonaje):-
     trabajaPara(Personaje, OtroPersonaje).
+
+
+masAtareado(Personaje):-
+    encargosDe(Personaje, Encargos),
+    length(Encargos, CantidadEncargos),
+    forall((encargosDe(OtroPersonaje, OtrosEncargos), Personaje \= OtroPersonaje, length(OtrosEncargos, OtraCantidadEncargos)), CantidadEncargos > OtraCantidadEncargos).
+
+encargosDe(Personaje, Encargos):-
+    encargo(_,Personaje,_),
+    findall(Encargo, encargo(_,Personaje, Encargo), Encargos).
 
