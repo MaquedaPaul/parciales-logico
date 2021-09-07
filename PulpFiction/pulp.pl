@@ -93,3 +93,13 @@ jefePeligroso(Personaje, Jefe):-
     esPeligroso(Jefe).
 
 
+sanCayetano(Personaje):-
+    trabajaPara(Personaje,_),
+    forall((tieneCerca(Personaje, OtroPersonaje), Personaje \= OtroPersonaje), encargo(Personaje, OtroPersonaje,_)).
+
+tieneCerca(Personaje, OtroPersonaje):-
+    sonAmigos(Personaje, OtroPersonaje).
+
+tieneCerca(Personaje, OtroPersonaje):-
+    trabajaPara(Personaje, OtroPersonaje).
+
