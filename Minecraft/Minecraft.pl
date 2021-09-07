@@ -97,5 +97,18 @@ porcentajeDeHambrientos(Lugar, Porcentaje):-
     length(Jugadores, CantidadTotal),
     length(JugadoresHambrientos, Cantidad),
 Porcentaje is (Cantidad * 100)/CantidadTotal.
+
+
+
+item(horno, [ itemSimple(piedra, 8) ]).
+item(placaDeMadera, [ itemSimple(madera, 1) ]).
+item(palo, [ itemCompuesto(placaDeMadera) ]).
+item(antorcha, [ itemCompuesto(palo), itemSimple(carbon, 1) ]).
+
+puedeConstruir(Jugador, Item):-
+    jugador(Jugador,_,_),
+    item(Item, ItemsNecesariosParaConstruir),
+    forall(tieneItem(Jugador, ItemNecesario), Action)
     
-    
+
+
