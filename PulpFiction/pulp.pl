@@ -114,3 +114,24 @@ encargosDe(Personaje, Encargos):-
     encargo(_,Personaje,_),
     findall(Encargo, encargo(_,Personaje, Encargo), Encargos).
 
+
+personajesRespetables(Personajes):-
+    findall(Personaje, esRespetable(Personaje), Personajes).
+
+esRespetable(Personaje):-
+    nivelDeRespeto(Personaje, Nivel),
+    Nivel > 9.
+
+nivelDeRespeto(Personaje, Nivel):-
+    personaje(Personaje, actriz(Peliculas)),
+    length(Peliculas, CantidadDePeliculas),
+    Nivel is CantidadDePeliculas/10.
+
+nivelDeRespeto(Personaje, 10):-
+    personaje(Personaje, mafioso(resuelveProblemas)).
+
+nivelDeRespeto(Personaje, 1):-
+    personaje(Personaje, mafioso(maton)).
+
+nivelDeRespeto(Personaje, 20):-
+    personaje(Personaje, mafioso(capo)).
