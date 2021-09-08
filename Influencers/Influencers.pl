@@ -52,4 +52,23 @@ exclusivo(Influencer):-
     forall(usuarioTiene(Influencer, OtraRedSocial), RedSocial == OtraRedSocial).
 
 
+%video(RedSocial, [Personas], duracion(Tiempo))
+%foto(RedSocial, [Personas])
+%stream(RedSocial, Tematica).
+
+publico(ana, video(tiktok, [beto, evelyn], 1)).
+publico(ana, video(tiktok, [ana], 1)).
+publico(ana, foto(instagram, [beto, evelyn])).
+
+publico(beto, foto(instagram, [])).
+
+publico(cami, stream(twitch, leagueOfLegends)).
+
+publico(cami, video(youtube, [cami], 5)).
+
+publico(evelyn, foto(instagram, [cami, evelyn])).
+
+tematica(leagueOfLegends).
+tematica(minecraft).
+tematica(aoe).
 
