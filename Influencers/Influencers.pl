@@ -113,5 +113,27 @@ aparecenEn(foto(Personas), Personas).
 aparecenEn(video(Personas, _), Personas).
 
 
+caminoALaFama(Usuario):-
+    usuarioTiene(Usuario,_),
+    not(influencer(Usuario)),
+    influencer(Influencer),
+    publico(Influencer, _, Contenido),
+    aparecenEn(Contenido, Personas),
+    member(Usuario, Personas),
+    Usuario \= Influencer.
+
+caminoALaFama(Usuario):-
+    usuarioTiene(Usuario,_),
+    not(influencer(Usuario)),
+    publico(Influencer, _, Contenido),
+    aparecenEn(Contenido, Personas),
+    member(OtroUsuario, Personas),
+    publico(OtroUsuario, _, OtroContenido),
+    aparecenEn(OtroContenido, OtrasPersonas),
+    member(OtroUsuario, OtrasPersonas),
+    Usuario \= Influencer,
+    Usuario \= OtroUsuario,
+    OtroUsuario \= Influencer.
+
 
 
