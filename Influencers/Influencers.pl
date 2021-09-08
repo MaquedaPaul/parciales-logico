@@ -14,6 +14,11 @@ usuarioTiene(dani, redSocial(youtube, 1000000)).
 
 usuarioTiene(evelyn, redSocial(instagram, 1)).
 
+redSocial(youtube).
+redSocial(tiktok).
+redSocial(instagram).
+redSocial(twitch).
+
 
 
 influencer(Usuario):-
@@ -39,15 +44,12 @@ redSocialExistente(RedSocial):-
     usuarioTiene(_,redSocial(RedSocial, Personas)),
     Personas >= 1.
 
-redSocial(redSocial(RedSocial,_), Nombre).
+redSocial(redSocial(RedSocial,_), RedSocial).
 
 exclusivo(Influencer):-
     influencer(Influencer),
-    usuarioTiene(Influencer, redSocial(RedSocial,_)),
-    not(usuarioTiene(Influencer, redSocial(OtraRedSocial,_))),
-    RedSocial \= OtraRedSocial.
-
-
+    usuarioTiene(Influencer, RedSocial),
+    forall(usuarioTiene(Influencer, OtraRedSocial), RedSocial == OtraRedSocial).
 
 
 
