@@ -14,8 +14,9 @@ Los usuarios tienen canales en distintas redes sociales con distinta cantidad de
 
 - evelyn tiene un instagram con 1 seguidor.
 
-
+2)
 Sobre los influencers:
+
 a) influencer/1 se cumple para un usuario que tiene más de 10.000 seguidores en total entre todas sus redes.
 En los usuarios de ejemplo, dani, ana y beto son influencers.
 b) omnipresente/1 se cumple para un influencer si está en cada red que existe (se consideran como existentes aquellas redes en las que hay al menos un usuario).
