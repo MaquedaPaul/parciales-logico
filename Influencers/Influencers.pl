@@ -56,17 +56,17 @@ exclusivo(Influencer):-
 %foto(RedSocial, [Personas])
 %stream(RedSocial, Tematica).
 
-publico(ana, video(tiktok, [beto, evelyn], 1)).
-publico(ana, video(tiktok, [ana], 1)).
-publico(ana, foto(instagram, [beto, evelyn])).
+publico(ana, tiktok, video([beto, evelyn], 1)).
+publico(ana, tiktok, video([ana], 1)).
+publico(ana, instagram, foto([beto, evelyn])).
 
-publico(beto, foto(instagram, [])).
+publico(beto, instagram, foto([])).
 
-publico(cami, stream(twitch, leagueOfLegends)).
+publico(cami, twitch, stream(leagueOfLegends)).
 
-publico(cami, video(youtube, [cami], 5)).
+publico(cami, youtube, video([cami], 5)).
 
-publico(evelyn, foto(instagram, [cami, evelyn])).
+publico(evelyn, instagram, foto([cami, evelyn])).
 
 tematica(leagueOfLegends).
 tematica(minecraft).
@@ -77,14 +77,41 @@ relacionadaConVideojuegos(minecraft).
 relacionadaConVideojuegos(aoe).
 
 adictiva(RedSocial):-
-    forall(Contenido, esAdictivo(Contenido)).
+    publico(_, RedSocial,_),
+    forall(publico(_,RedSocial, Contenido), esAdictivo(Contenido)).
 
-esAdictivo(video(_,_,Minutos)):-
+
+esAdictivo(video(_,Minutos)):-
     Minutos < 3.
 
-esAdictivo(stream(_,Tematica)):-
+esAdictivo(stream(Tematica)):-
     relacionadaConVideojuegos(Tematica).
 
-esAdictivo(foto(_, Personas)):-
+esAdictivo(foto(Personas)):-
     length(Personas, Cantidad),
-    Canitdad < 4.
+    Cantidad < 4.
+
+
+colaboran(Usuario, OtroUsuario):-
+    colaboroCon(Usuario, OtroUsuario).
+
+colaboran(Usuario, OtroUsuario):-
+    colaboroCon(OtroUsuario, Usuario).
+
+colaboroCon(Usuario, OtroUsuario):-
+    publico(Usuario, _, Contenido),
+    aparecenEn(Contenido, Personas),
+    member(OtroUsuario, Personas),
+    Usuario \= OtroUsuario.
+
+
+aparecenEn(stream(Tematica), [Persona]):-
+    publico(Persona, _, stream(Tematica)).
+
+aparecenEn(foto(Personas), Personas).
+
+aparecenEn(video(Personas, _), Personas).
+
+
+
+
