@@ -72,3 +72,19 @@ tematica(leagueOfLegends).
 tematica(minecraft).
 tematica(aoe).
 
+relacionadaConVideojuegos(leagueOfLegends).
+relacionadaConVideojuegos(minecraft).
+relacionadaConVideojuegos(aoe).
+
+adictiva(RedSocial):-
+    forall(Contenido, esAdictivo(Contenido)).
+
+esAdictivo(video(_,_,Minutos)):-
+    Minutos < 3.
+
+esAdictivo(stream(_,Tematica)):-
+    relacionadaConVideojuegos(Tematica).
+
+esAdictivo(foto(_, Personas)):-
+    length(Personas, Cantidad),
+    Canitdad < 4.
