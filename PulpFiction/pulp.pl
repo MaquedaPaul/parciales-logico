@@ -135,3 +135,5 @@ nivelDeRespeto(Personaje, 1):-
 
 nivelDeRespeto(Personaje, 20):-
     personaje(Personaje, mafioso(capo)).
+
+
