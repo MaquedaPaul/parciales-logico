@@ -30,5 +30,24 @@ seguidoresEnRedesSociales(Usuario, TotalSeguidores):-
     sum_list(Seguidores, TotalSeguidores).
 
 
+omnipresente(Influencer):-
+    influencer(Influencer),
+    forall(redSocialExistente(RedSocial), usuarioTiene(Influencer, redSocial(RedSocial,_))).
+
+
+redSocialExistente(RedSocial):-
+    usuarioTiene(_,redSocial(RedSocial, Personas)),
+    Personas >= 1.
+
+redSocial(redSocial(RedSocial,_), Nombre).
+
+exclusivo(Influencer):-
+    influencer(Influencer),
+    usuarioTiene(Influencer, redSocial(RedSocial,_)),
+    not(usuarioTiene(Influencer, redSocial(OtraRedSocial,_))),
+    RedSocial \= OtraRedSocial.
+
+
+
 
 
